@@ -1,4 +1,3 @@
-// Navbar.jsx
 import React, { useState } from 'react';
 import './Navbar.css';
 import { assets } from '../../assets/assets';
@@ -58,10 +57,12 @@ const Navbar = () => {
             />
           )}
         </div>
+
         <div className="navbar-search-icon">
           <img src={assets.basket_icon} alt="Cart" />
           <div className="dot"></div>
         </div>
+
         <button>Sign In</button>
       </div>
     </div>
