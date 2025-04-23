@@ -1,63 +1,167 @@
 .explore-menu {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding-top: 60px; /* Push content below fixed navbar */
+    gap: 2rem;
+    padding: 6rem 5% 3rem;
+    background: linear-gradient(to bottom, #fff9f8 0%, #ffffff 100%);
+}
+
+.menu-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
 }
 
 .explore-menu h1 {
-    color: #262626;
-    font-weight: 500;
+    color: #2a2a2a;
+    font-weight: 700;
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
 }
 
 .explore-menu-text {
-    max-width: 60%;
-    color: #808080; /* fixed typo: "columns" to "color" */
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 .explore-menu-list {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-    text-align: center;
-    margin: 20px 0px;
-    overflow: scroll;
+    gap: 2.5rem;
+    padding: 2rem 0;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    position: relative;
 }
 
 .explore-menu-list::-webkit-scrollbar {
-    display: none;
+    height: 6px;
+    background: #f0f0f0;
 }
 
-.explore-menu-list-item img {
-    width: 7.5vw;
-    min-width: 80px;
+.explore-menu-list::-webkit-scrollbar-thumb {
+    background: #ff6b6b;
+    border-radius: 4px;
+}
+
+.explore-menu-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
     cursor: pointer;
+    position: relative;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.explore-menu-list-item:hover {
+    transform: translateY(-5px);
+}
+
+.explore-menu-list-item.active {
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.menu-image-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    transition: 0.2s;
+    padding: 4px;
+    transition: all 0.3s ease;
 }
 
-.explore-menu-list-item p {
-    margin-top: 10px;
-    color: #747474;
-    font-size: max(1.4vw, 16px);
-    cursor: pointer;
+.menu-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-.explore-menu hr {
-    margin: 10px 0px;
-    height: 2px;
-    background-color: #e2e2e2;
-    border: none;
+.active-indicator {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
-.explore-menu-list-item .active {
-    border: 4px solid tomato;
-    padding: 2px;
+.explore-menu-list-item.active .active-indicator {
+    border-color: #ff6b6b;
+}
+
+.menu-label {
+    color: #444;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.explore-menu-list-item.active .menu-label {
+    color: #ff6b6b;
+}
+
+.scroll-indicator {
+    text-align: center;
+    margin-top: 1.5rem;
+    opacity: 0.6;
+    animation: bounce 2s infinite;
+}
+
+.scroll-arrow {
+    font-size: 1.5rem;
+    color: #ff6b6b;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
 }
 
 @media (max-width: 768px) {
     .explore-menu {
-        padding-top: 100px; /* Adjust depending on your mobile navbar height */
+        padding: 6rem 3% 2rem;
+    }
+    
+    .explore-menu h1 {
+        font-size: 2rem;
+    }
+    
+    .explore-menu-text {
+        max-width: 100%;
+        font-size: 1rem;
+    }
+    
+    .menu-image-container {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .menu-label {
+        font-size: 0.95rem;
+    }
+}
+
+@media (hover: hover) {
+    .explore-menu-list-item:hover .menu-image {
+        transform: scale(1.05);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+    
+    .explore-menu-list-item:hover .active-indicator {
+        border-color: rgba(255, 107, 107, 0.3);
     }
 }

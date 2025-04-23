@@ -5,10 +5,15 @@ import { menu_list } from '../../assets/assets';
 const ExploreMenu = ({ category, setCategory }) => {
   return (
     <div className='explore-menu' id='explore-menu'>
-      <h1>Explore our menu</h1>
-      <p className='explore-menu-text'>
-        Explore from a diverse menu featuring a delectable array of dishes. Our mission is to deliver irresistible flavors with speed and care, bringing the joy of restaurant-quality meals right to your doorstep—fresh, fast, and full of Swad.
-      </p>
+      <div className="menu-header">
+        <h1>Discover Culinary Delights</h1>
+        <p className='explore-menu-text'>
+          Journey through our exquisite menu featuring masterfully crafted dishes. 
+          We combine premium ingredients with authentic recipes to bring you 
+          restaurant-quality meals infused with passion and tradition.
+        </p>
+      </div>
+      
       <div className='explore-menu-list'>
         {menu_list.map((item, index) => (
           <div
@@ -16,18 +21,24 @@ const ExploreMenu = ({ category, setCategory }) => {
               setCategory(prev => (prev === item.menu_name ? 'All' : item.menu_name))
             }
             key={index}
-            className='explore-menu-list-item'
+            className={`explore-menu-list-item ${category === item.menu_name ? 'active' : ''}`}
           >
-            <img
-              className={category === item.menu_name ? 'active' : ''}
-              src={item.menu_image}
-              alt={item.menu_name}
-            />
-            <p>{item.menu_name}</p>
+            <div className="menu-image-container">
+              <img
+                src={item.menu_image}
+                alt={item.menu_name}
+                className="menu-image"
+              />
+              <div className="active-indicator"></div>
+            </div>
+            <p className="menu-label">{item.menu_name}</p>
           </div>
         ))}
       </div>
-      <hr />
+      
+      <div className="scroll-indicator">
+        <span className="scroll-arrow">➜</span>
+      </div>
     </div>
   );
 };
