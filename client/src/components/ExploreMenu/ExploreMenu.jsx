@@ -36,9 +36,7 @@ const ExploreMenu = ({ category, setCategory }) => {
         ))}
       </div>
       
-      <div className="scroll-indicator">
-        <span className="scroll-arrow">➜</span>
-      </div>
+      
     </div>
   );
 };
