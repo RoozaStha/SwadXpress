@@ -3,7 +3,7 @@
   min-height: 600px;
   position: relative;
   background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3)),
-              url('/header_img.png') center/cover fixed;
+              url('/header_img.png')  ;
   display: flex;
   align-items: center;
   padding: 0 0%;
