@@ -1,0 +1,153 @@
+.swad-cta-section {
+    padding: 5rem 2rem;
+    background: transparent;
+    color: tomato;
+
+  }
+  
+  .swad-cta-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .swad-cta-title {
+    text-align: center;
+    font-size: 2.8rem;
+    color: tomato;
+    margin-bottom: 4rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .swad-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 5rem;
+  }
+  
+  .swad-benefit-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(229, 62, 62, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .swad-benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(229, 62, 62, 0.15);
+  }
+  
+  .swad-benefit-icon {
+    font-size: 3rem;
+    color: tomato;
+    margin-bottom: 1.5rem;
+  }
+  
+  .swad-benefit-card h3 {
+    color: #2d2d2d;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  
+  .swad-benefit-card p {
+    color: #666;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  
+  .swad-delivery-cta {
+    text-align: center;
+    background: tomato;
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .swad-delivery-cta::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+  }
+  
+  .swad-cta-main-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  .swad-delivery-cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+  }
+  
+  .swad-delivery-cta p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+  }
+  
+  .swad-cta-button {
+    background: white;
+    color: tomato;
+    padding: 1.2rem 3rem;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+  }
+  
+  .swad-cta-button:hover {
+    background: #f8f8f8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .swad-cta-arrow {
+    font-weight: 800;
+    transition: transform 0.3s ease;
+  }
+  
+  .swad-cta-button:hover .swad-cta-arrow {
+    transform: translateX(3px);
+  }
+  
+  @media (max-width: 768px) {
+    .swad-cta-section {
+      padding: 3rem 1.5rem;
+    }
+    
+    .swad-cta-title {
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .swad-delivery-cta h2 {
+      font-size: 1.8rem;
+    }
+    
+    .swad-benefit-card {
+      padding: 2rem;
+    }
+  }
