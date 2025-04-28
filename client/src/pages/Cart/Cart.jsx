@@ -62,7 +62,7 @@ const Cart = () => {
             </div>
             <div className="summary-row total">
               <span>Total</span>
-              <span>₹{(getTotalCartAmount() + 2).toFixed(2)}</span>
+              <span>₹{getTotalCartAmount()===0?0:getTotalCartAmount()+2}</span>
             </div>
           </div>
           <button 
