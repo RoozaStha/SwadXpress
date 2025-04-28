@@ -9,17 +9,17 @@ import SwadCTA from "./components/ActionSection/SwadCTA";
 import LoginPopup from "./components/LoginPopup/LoginPopup";
 
 const App = () => {
+  const [showLogin, setShowLogin] = useState(false);
 
-const [showLogin,setShowLogin] = useState(false)
   return (
     <>
-    {showLogin ? <LoginPopup setShowLogin={setShowLogin}/> : <></>}
+      {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
       <div className="app">
         <Navbar setShowLogin={setShowLogin} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/" elememt={<Cart />} />
-          <Route path="/" element={<PlaceOrder />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/place-order" element={<PlaceOrder />} /> {/* ✅ changed */}
         </Routes>
       </div>
       <SwadCTA />

@@ -1,31 +1,39 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Navbar.css';
 import { assets } from '../../assets/assets';
+import { Link, useLocation } from 'react-router-dom';
+import { StoreContext } from '../../context/StoreContext';
 
-const Navbar = ({setShowLogin}) => {
+const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const location = useLocation();
+
+  const{getTotalCartAmount} = useContext(StoreContext);
+
+  // Update active menu when route changes
+  React.useEffect(() => {
+    const path = location.pathname === "/" ? "home" : location.pathname.slice(1);
+    setMenu(path);
+  }, [location.pathname]);
+
   const menuItems = [
-    { id: "home", label: "Home" },
-    { id: "menu", label: "Menu" },
-    { id: "privacy-policy", label: "Privacy Policy" },
-    { id: "contact-us", label: "Contact Us" }
+    { id: "home", label: "Home", path: "/" },
+    { id: "menu", label: "Menu", path: "/menu" },
+    { id: "privacy-policy", label: "Privacy Policy", path: "/privacy-policy" },
+    { id: "contact-us", label: "Contact Us", path: "/contact-us" }
   ];
 
   return (
     <div className="navbar">
-      <img src={assets.logo} alt="logo" className="logo" />
-      
+      <Link to='/'><img src={assets.logo} alt="logo" className="logo" /></Link>
+
       <ul className="navbar-menu">
         {menuItems.map((item) => (
-          <li
-            key={item.id}
-            className={menu === item.id ? "active" : ""}
-            onClick={() => setMenu(item.id)}
-          >
-            {item.label}
+          <li key={item.id} className={menu === item.id ? "active" : ""}>
+            <Link to={item.path} className="nav-link">{item.label}</Link>
           </li>
         ))}
       </ul>
@@ -59,11 +67,11 @@ const Navbar = ({setShowLogin}) => {
         </div>
 
         <div className="navbar-search-icon">
-          <img src={assets.basket_icon} alt="Cart" />
-          <div className="dot"></div>
+          <Link to='/cart'><img src={assets.basket_icon} alt="Cart" /></Link>
+          <div className={getTotalCartAmount()?"":"dot"}></div>
         </div>
 
-        <button onClick={()=> setShowLogin(true)}>Sign In</button>
+        <button onClick={() => setShowLogin(true)}>Sign In</button>
       </div>
     </div>
   );
