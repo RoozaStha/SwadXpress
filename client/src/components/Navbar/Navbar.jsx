@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -8,23 +8,35 @@ const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
   const location = useLocation();
-
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
+
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
     navigate("/");
   };
 
-  // Update active menu when route changes
-  React.useEffect(() => {
+  useEffect(() => {
     const path =
       location.pathname === "/" ? "home" : location.pathname.slice(1);
     setMenu(path);
   }, [location.pathname]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const menuItems = [
     { id: "home", label: "Home", path: "/" },
@@ -78,17 +90,24 @@ const Navbar = ({ setShowLogin }) => {
         </div>
 
         <div className="navbar-search-icon">
-          <Link to="/cart">
+          <Link to="/cart" className="cart-icon-wrapper">
             <img src={assets.basket_icon} alt="Cart" />
+            {getTotalCartAmount() > 0 && <div className="dot" />}
           </Link>
-          <div className={getTotalCartAmount() ? "" : "dot"}></div>
         </div>
+
         {!token ? (
           <button onClick={() => setShowLogin(true)}>Sign In</button>
         ) : (
-          <div className="navbar-profile">
+          <div
+            className="navbar-profile"
+            onClick={() => setShowDropdown(!showDropdown)}
+            ref={dropdownRef}
+          >
             <img src={assets.profile_icon} alt="Profile" />
-            <ul className="nav-profile-dropdown">
+            <ul
+              className={`nav-profile-dropdown ${showDropdown ? "show" : ""}`}
+            >
               <li>
                 <img src={assets.bag_icon} alt="Orders" />
                 <p>Orders</p>
