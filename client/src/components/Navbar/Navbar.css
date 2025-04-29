@@ -215,6 +215,61 @@ width: 20px;
     
 }
 
+.navbar-profile{
+    position: relative;
+    cursor: pointer;
+    padding: 5px 0;
+    margin: -5px 0; 
+
+}
+.nav-profile-dropdown {
+    position: absolute;
+    display: none;
+    right: 0;
+    top: calc(100% + 5px);
+    z-index: 1001; /* Increase z-index to be higher than navbar */
+    background-color: #fff2cf;
+    padding: 12px 25px;
+    border-radius: 4px;
+    border: 1px solid tomato;
+    outline: 2px solid white;
+    list-style: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Add shadow for better visibility */
+    margin-top: 0; /* Add space between profile icon and dropdown */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+.navbar-profile:hover .nav-profile-dropdown{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff2cf;
+    padding: 12px 25px;
+    border-radius: 4px;
+    border: 1px solid tomato;
+    outline: 2px solid white;
+    list-style: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.nav-profile-dropdown li{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    pointer-events: auto;
+
+}
+.nav-profile-dropdown img{
+    width: 20px;
+}
+.nav-profile-dropdown li:hover{
+    color: tomato;
+}
 @media (max-width: 750px) {
 
      .navbar-menu{
