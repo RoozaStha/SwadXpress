@@ -1,36 +1,112 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Add.css";
-import { assets } from "../../assets/assets";
+import { assets, url as assetsUrl } from "../../assets/assets"; // renamed to avoid shadowing
+import axios from "axios";
+import { toast } from "react-toastify";
+
+
 
 const Add = () => {
+  const url = "http://localhost:4000"; // renamed 'url' above so this doesn't conflict
+  const [image, setImage] = useState(false);
+  const [data, setData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    category: "Salad", // default
+  });
+
+  const onChangeHandler = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setData((data) => ({ ...data, [name]: value }));
+  };
+
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("price", Number(data.price));
+    formData.append("category", data.category);
+    formData.append("image", image);
+
+    try {
+      const response = await axios.post(`${url}/api/food/add`, formData);
+      if (response.data.success) {
+        setData({
+          name: "",
+          description: "",
+          price: "",
+          category: "Salad",
+        });
+        setImage(false);
+        toast.success(response.data.message)
+      } else {
+       toast.error(response.data.message)
+      }
+    } catch (error) {
+      alert("Something went wrong. Please check the console for details.");
+      console.error("Submission Error:", error);
+    }
+  };
+
   return (
     <div className="add">
-      <form className="flex-col">
+      <form className="flex-col" onSubmit={onSubmitHandler}>
         <div className="add-img-upload">
           <p>Upload Image</p>
           <label htmlFor="image">
-            <img src={assets.upload_area} alt="" />
+            <img
+              src={image ? URL.createObjectURL(image) : assets.upload_area}
+              alt="Upload Preview"
+            />
           </label>
-          <input type="file" id="image" hidden required />
+          <input
+            type="file"
+            id="image"
+            hidden
+            required
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                setImage(e.target.files[0]);
+              }
+            }}
+          />
         </div>
+
         <div className="add-product-name flex-col">
           <p>Product Name</p>
-          <input type="text" name="name" placeholder="Type Here" />
+          <input
+            onChange={onChangeHandler}
+            value={data.name}
+            type="text"
+            name="name"
+            placeholder="Type Here"
+          />
         </div>
 
         <div className="add-product-description flex-col">
           <p>Product Description</p>
           <textarea
+            onChange={onChangeHandler}
+            value={data.description}
             name="description"
             rows="6"
             placeholder="Write content here"
             required
           ></textarea>
         </div>
+
         <div className="add-category-price">
           <div className="add-category flex-col">
             <p>Product Category</p>
-            <select name="category">
+            <select
+              onChange={onChangeHandler}
+              value={data.category}
+              name="category"
+            >
               <option value="Salad">Salad</option>
               <option value="Rolls">Rolls</option>
               <option value="Deserts">Deserts</option>
@@ -44,9 +120,16 @@ const Add = () => {
 
           <div className="add-price flex-col">
             <p>Product Price</p>
-            <input type="Number" name="price" placeholder="Rs20" />
+            <input
+              onChange={onChangeHandler}
+              value={data.price}
+              type="number"
+              name="price"
+              placeholder="Rs20"
+            />
           </div>
         </div>
+
         <button type="submit" className="add-btn">
           ADD
         </button>
