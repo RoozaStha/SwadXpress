@@ -1,0 +1,167 @@
+/* List.css */
+.list {
+    max-width: 1400px;
+    margin: 50px auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.1);
+}
+
+.list p:first-child {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 35px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.list-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.list-table-format {
+    display: grid;
+    grid-template-columns: 0.5fr 2.5fr 1.5fr 1.5fr 0.5fr;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 20px;
+    border: 1px solid #dcdcdc;
+    font-size: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.list-table-format.title {
+    background-color: #f1f3f5;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    color: tomato;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 0.7px;
+}
+
+.list-table-format:not(.title):hover {
+    background-color: #f8fafc;
+    transform: translateX(8px);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+.list-table-format img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.list-table-format img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+}
+
+.list-table-format p {
+    margin: 0;
+    color: #495057;
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list-table-format p:nth-child(3) {
+    text-transform: capitalize;
+}
+
+.list-table-format p:nth-child(4) {
+    color: tomato;
+    font-weight: 600;
+}
+
+.list-table-format p:last-child {
+    color: #ff6b6b;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.list-table-format p:last-child:hover {
+    color: #ff5252;
+    transform: scale(1.2);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .list {
+        padding: 25px;
+        margin: 20px;
+    }
+
+    .list-table-format {
+        grid-template-columns: 1fr 3fr 1.5fr;
+        gap: 12px;
+    }
+
+    .list-table-format.title {
+        display: none;
+    }
+
+    .list-table-format img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .list-table-format p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .list-table-format {
+        grid-template-columns: 60px 1fr 1fr;
+        grid-template-rows: auto auto;
+        position: relative;
+        padding: 15px;
+        border: 1px solid #f0f0f0;
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+
+    .list-table-format p:nth-child(3),
+    .list-table-format p:nth-child(4) {
+        grid-row: 2;
+    }
+
+    .list-table-format p:nth-child(3) {
+        grid-column: 2;
+    }
+
+    .list-table-format p:nth-child(4) {
+        grid-column: 3;
+        text-align: right;
+    }
+
+    .list-table-format p:last-child {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+
+    .list p:first-child {
+        font-size: 22px;
+    }
+}
+
+/* Pointer class */
+.cursor {
+    cursor: pointer;
+}
